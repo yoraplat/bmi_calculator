@@ -14,13 +14,13 @@
     <h1>Login</h1>
     <form id="login_form" action="">
         <div>
-            <label for="username">username</label>
-            <input type="text" name="username" value="yo" placeholder="username">
+            <label for="username">Gebruikersnaam</label>
+            <input type="text" name="username" placeholder="Gebruikersnaam">
             <p id="username-error" class="error-msg"></p>
         </div>
         <div>
-            <label for="password">password</label>
-            <input type="password" value="test123" name="password">
+            <label for="password">Wachtwoord</label>
+            <input type="password" name="password" placeholder="Wacthwoord">
             <p id="password-error" class="error-msg"></p>
         </div>
         <button>submit</button>
@@ -34,7 +34,7 @@
             let input = $(this).serialize()
 
             $.ajax({
-                url: 'http://localhost:5050/api/login',
+                url: "<?php echo $_ENV['HOST'] ?>" + '/api/login',
                 type: 'post',
                 dataType: 'json',
                 data: input,
@@ -46,7 +46,7 @@
                         displayErrors(data)
                     } else if (data.auth) {
                         // Return homepage
-                        window.location.href = "http://localhost:5050" + data.redirect_to;
+                        window.location.href = "<?php echo $_ENV['HOST'] ?>" + data.redirect_to;
                     }
                 },
                 error: function(error) {

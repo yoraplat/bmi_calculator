@@ -51,7 +51,7 @@
             let input = $(this).serialize()
 
             $.ajax({
-                url: 'http://localhost:5050/api/register',
+                url: "<?php echo $_ENV['HOST'] ?>" + '/api/register',
                 type: 'post',
                 dataType: 'json',
                 data: input,
@@ -63,7 +63,7 @@
                         displayErrors(data)
                     } else if (data.auth) {
                         // Return homepage
-                        window.location.href = "http://localhost:5050" + data.redirect_to;
+                        window.location.href = "<?php echo $_ENV['HOST'] ?>" + data.redirect_to;
                     }
                 },
                 error: function(error) {

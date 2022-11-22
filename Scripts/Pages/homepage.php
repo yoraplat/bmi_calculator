@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <?php require './Includes/navigation.php' ?>
+    <?php include './Includes/navigation.php' ?>
 
     <h1>Welkom <?php echo $_SESSION['username'] ?></h1>
     <form id="calculator_form" action="" method="POST">
@@ -42,7 +42,7 @@
             let input = $(this).serialize()
 
             $.ajax({
-                url: 'http://localhost:5050/api/calculate',
+                url: "<?php echo $_ENV['HOST'] ?>" + '/api/calculate',
                 type: 'post',
                 dataType: 'json',
                 data: input,

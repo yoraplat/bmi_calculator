@@ -6,7 +6,7 @@ class SessionService
 {
     public function isAuthenticated()
     {
-        session_start();
+        self::createSession();
         if (isset($_SESSION['login']) && $_SESSION['login']) {
             return true;
         } else {
@@ -25,10 +25,17 @@ class SessionService
 
     public function logout()
     {
-        session_start();
+        self::createSession();
         session_destroy();
 
         // Redirect to login page
-        header("Location: http://localhost:5050/login");
+        header("Location: " .  $_ENV['HOST'] . "/login");
+    }
+
+    public function createSession()
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
     }
 }

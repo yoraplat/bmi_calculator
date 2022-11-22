@@ -3,7 +3,7 @@
 $mysql_host = "localhost";
 $mysql_database = "bmi_calculator";
 $mysql_user = "root";
-$mysql_password = "Test123!";
+$mysql_password = "secret";
 
 # MySQL with PDO_MYSQL  
 $db = new PDO("mysql:host=$mysql_host;dbname=$mysql_database", $mysql_user, $mysql_password);

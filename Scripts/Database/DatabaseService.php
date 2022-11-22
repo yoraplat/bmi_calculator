@@ -17,7 +17,7 @@ class DatabaseService
         }
 
         // Prepare and bind
-        $stmt = $conn->prepare("INSERT INTO bmi_database.users (firstname, lastname, username, gender, password) VALUES(?, ?, ?, ?, ?);");
+        $stmt = $conn->prepare("INSERT INTO users (firstname, lastname, username, gender, password) VALUES(?, ?, ?, ?, ?);");
 
         // Check if preparing is successful
         if (!$stmt) {
@@ -31,7 +31,7 @@ class DatabaseService
         $lastname  = $data['lastname'];
         $username  = $data['username'];
         $gender    = $data['gender'];
-        $password  = crypt($data['password'], '');
+        $password  = crypt($data['password'], 'qsdqsd');
         $stmt->execute();
 
         return $stmt;
@@ -51,7 +51,7 @@ class DatabaseService
         }
 
         // Prepare and bind
-        $stmt = $conn->prepare("INSERT INTO bmi_database.results (age, mass, length, result, date, user_id) VALUES(?, ?, ?, ?, ?, ?);");
+        $stmt = $conn->prepare("INSERT INTO results (age, mass, length, result, date, user_id) VALUES(?, ?, ?, ?, ?, ?);");
 
         // Check if preparing is successful
         if (!$stmt) {
@@ -84,7 +84,7 @@ class DatabaseService
         }
 
         // Prepare and bind
-        $stmt = $conn->prepare("SELECT * FROM bmi_database.users WHERE username=? LIMIT 1");
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username=? LIMIT 1");
 
         // Check if preparing is successful
         if (!$stmt) {
@@ -111,7 +111,7 @@ class DatabaseService
         }
 
         // Prepare and bind
-        $stmt = $conn->prepare("SELECT * FROM bmi_database.results WHERE user_id=?");
+        $stmt = $conn->prepare("SELECT * FROM results WHERE user_id=?");
 
         // Check if preparing is successful
         if (!$stmt) {

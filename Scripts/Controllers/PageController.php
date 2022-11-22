@@ -9,7 +9,7 @@ class PageController
 {
     public static function index()
     {
-        return file_get_contents(include './Scripts/Pages/homepage.php');
+        return file_get_contents(require './Scripts/Pages/homepage.php');
     }
 
     public static function post()
@@ -42,7 +42,7 @@ class PageController
         }
     }
 
-    private function calculateBMI(int $weight, int $length, int $age)
+    private static function calculateBMI(int $weight, int $length, int $age)
     {
         $bmi = ($weight / $length / $length) * 10000;
 
@@ -51,7 +51,7 @@ class PageController
         return $result;
     }
 
-    private function BMIByAge(int $age, int $bmi)
+    private static function BMIByAge(int $age, int $bmi)
     {
         switch ($age) {
             case $age >= 18 && $age <= 69:
@@ -89,7 +89,7 @@ class PageController
         }
     }
 
-    private function validatePost($request): array
+    private static function validatePost($request): array
     {
         // Sanitize input
         $weight = htmlspecialchars($request['weight']);

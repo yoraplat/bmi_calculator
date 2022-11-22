@@ -46,7 +46,7 @@ class RegisterController
         }
     }
 
-    private function validatePost($request): array
+    private static function validatePost($request): array
     {
         // Sanitize input
         $firstname = htmlspecialchars($request['firstname']);

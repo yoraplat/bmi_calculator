@@ -1,7 +1,6 @@
 # Setup
 
 execute:
-- composer install
 - php migration_1.sql
 
 Serve php project

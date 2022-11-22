@@ -9,7 +9,7 @@ use Scripts\Services\SessionService;
 include('./Scripts/Controllers/PageController.php');
 include('./Scripts/Database/DatabaseService.php');
 include('./Scripts/Controllers/RegisterController.php');
-include('./Scripts/Controllers/LoginController.php');
+require('./Scripts/Controllers/LoginController.php');
 include('./Scripts/Controllers/HistoryController.php');
 include('./Scripts/Services/SessionService.php');
 
@@ -19,10 +19,12 @@ $method = $_SERVER['REQUEST_METHOD'];
 // The files should be in a different file
 $_ENV['servername'] = "localhost";
 $_ENV['serveruser'] = "root";
-$_ENV['serverpass'] = "Test123!";
+$_ENV['serverpass'] = "secret";
 $_ENV['dbname'] = "bmi_calculator";
-$_ENV['PORT'] = "5000";
+$_ENV['PORT'] = "3000";
 $_ENV['HOST'] = "http://localhost:" . $_ENV['PORT'];
+
+error_reporting(1);
 
 // Initiate session service
 $session_service = new SessionService();
@@ -51,7 +53,7 @@ switch ($current_uri) {
             if ($session_service->isAuthenticated()) {
                 echo PageController::post();
             } else {
-                header("Location: " . $_ENV['HOST'] . "login");
+                header("Location: " . $_ENV['HOST'] . "/login");
             }
         }
         break;
@@ -95,6 +97,7 @@ switch ($current_uri) {
         break;
 
     default:
+        http_response_code(404);
         echo file_get_contents(require './Scripts/Pages/404.php');
         break;
 }

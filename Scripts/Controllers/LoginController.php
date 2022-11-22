@@ -49,7 +49,7 @@ class LoginController
         }
     }
 
-    private function validatePost($request): array
+    private static function validatePost($request): array
     {
         // Sanitize input
         $username = htmlspecialchars($request['username']);

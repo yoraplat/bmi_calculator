@@ -1,0 +1,11 @@
+.history {
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: row; */
+    justify-content: flex-start;
+}
+
+.history-element {
+    margin: 5px;
+    width: 250px;
+}

@@ -55,6 +55,7 @@
                 datasets: [{
                     label: 'Evolutie BMI',
                     data: data,
+                    tension: 0.3
                 }, ],
             },
         });

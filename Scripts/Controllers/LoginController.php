@@ -44,7 +44,12 @@ class LoginController
                     'redirect_to' => '/'
                 ]);
             } else {
-                return json_encode(['data' => 'Gebruikersnaam en/of wachtwoord komen niet overeen']);
+                return json_encode([
+                    'errors' =>
+                    [
+                        'login' => 'Gebruikersnaam en/of wachtwoord komen niet overeen'
+                    ]
+                ]);
             }
         }
     }

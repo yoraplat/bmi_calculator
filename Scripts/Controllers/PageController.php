@@ -21,34 +21,38 @@ class PageController
             return json_encode($validated);
         } else {
             // Calculate bmi
-            $bmi = self::calculateBMI($validated['data']['weight'], $validated['data']['length'], $validated['data']['age']);
+            $data = self::calculateBMI($validated['data']['weight'], $validated['data']['length'], $validated['data']['age']);
 
-            if (isset($bmi['errors'])) {
-                return json_encode($bmi);
+            if (isset($data['errors'])) {
+                return json_encode($data);
             }
 
             $date = new DateTime();
             $database_service = new DatabaseService();
             $database_service->insertResult([
-                'age'     => 1,
+                'age'     => $validated['data']['age'],
                 'mass'    => $validated['data']['weight'],
                 'length'  => $validated['data']['length'],
-                'result'  => $bmi,
+                'result'  => $data['readable_bmi'],
+                'bmi'     => $data['bmi'],
                 'date'    => $date->format('Y-m-d H:i:s'),
                 'user_id' => $_SESSION['user_id'],
             ]);
 
-            return json_encode($bmi);
+            return json_encode($data['readable_bmi']);
         }
     }
 
-    private static function calculateBMI(int $weight, int $length, int $age)
+    private static function calculateBMI(int $weight, int $length, int $age): array
     {
         $bmi = ($weight / $length / $length) * 10000;
 
         $result = self::BMIByAge($age, $bmi);
 
-        return $result;
+        return [
+            'bmi' => $bmi,
+            'readable_bmi' => $result,
+        ];
     }
 
     private static function BMIByAge(int $age, int $bmi)

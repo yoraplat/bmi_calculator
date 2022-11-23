@@ -5,11 +5,9 @@
 }
 
 .history-element {
-    /* margin: 25px 5px; */
     margin-bottom: 25px;
     font-family: sans-serif;
     width: 24%;
-    /* padding */
     margin: auto 0.5% 25px 0.5%;
     background-color: lightgray;
     text-align: center;
@@ -111,4 +109,8 @@ form .error-msg {
     font-weight: bold;
     color: black;
     font-family: sans-serif;
+}
+
+#chart {
+    margin-bottom: 50px;
 }

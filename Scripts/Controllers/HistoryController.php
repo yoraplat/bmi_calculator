@@ -17,9 +17,15 @@ class HistoryController
         $user_results = $db->getUserHistory($_SESSION['user_id']);
 
         $results = [];
-        while ($result = mysqli_fetch_array($user_results)) {
+        while ($result = $user_results->fetch_assoc()) {
             $results[] = $result;
         }
-        return $results;
+
+        $chart_data = array_combine(array_column($results, 'id'), array_column($results, 'bmi'));
+
+        return [
+            'chart_data' => $chart_data,
+            'results' => $results,
+        ];
     }
 }

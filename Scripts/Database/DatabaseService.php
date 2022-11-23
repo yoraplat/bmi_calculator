@@ -51,14 +51,14 @@ class DatabaseService
         }
 
         // Prepare and bind
-        $stmt = $conn->prepare("INSERT INTO results (age, mass, length, result, date, user_id) VALUES(?, ?, ?, ?, ?, ?);");
+        $stmt = $conn->prepare("INSERT INTO results (age, mass, length, result, date, bmi, user_id) VALUES(?, ?, ?, ?, ?, ?, ?);");
 
         // Check if preparing is successful
         if (!$stmt) {
             die('Preparing statement failed');
         }
 
-        $stmt->bind_param("ssssss", $age, $mass, $length, $result, $date, $user_id);
+        $stmt->bind_param("sssssss", $age, $mass, $length, $result, $date, $bmi, $user_id);
 
         // set parameters and execute
         $age     = $data['age'];
@@ -66,6 +66,7 @@ class DatabaseService
         $length  = $data['length'];
         $result  = $data['result'];
         $date    = $data['date'];
+        $bmi    = $data['bmi'];
         $user_id = $_SESSION['user_id'];
         $stmt->execute();
 

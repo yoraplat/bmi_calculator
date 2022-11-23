@@ -25,12 +25,12 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `firstname` varchar(200) NOT NULL,
   `lastname` varchar(200) NOT NULL,
   `username` varchar(45) NOT NULL,
   `gender` varchar(7) DEFAULT NULL,
   `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `id` bigint NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_UN` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -53,12 +53,15 @@ DROP TABLE IF EXISTS `results`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `results` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
   `date` date NOT NULL,
   `mass` double NOT NULL,
   `age` int NOT NULL,
   `length` int NOT NULL,
+  `bmi` int NOT NULL,
   `result` varchar(22) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `user_id` bigint NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `results_FK` (`user_id`),
   CONSTRAINT `results_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
